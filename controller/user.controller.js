@@ -9,7 +9,9 @@ const addUser = async (req,res) => {
       login: req.body.login,
       password: req.body.password,
       age: req.body.age,
-      isdeleted: req.body.isdeleted
+      isdeleted: req.body.isdeleted,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname
     }
 
     const user = await User.create(info);
@@ -23,6 +25,14 @@ const getAllUsers = async (req,res) => {
   res.status(200).send(users);
 }
 
+const getOne = async (req,res) => {
+  let user = await User.findOne({where: {id: req.params.id}});
+  res.status(200).send(user);
+}
+
+
+
+
 // Update user
 const updateUser = async (req,res) => {
   let id = req.params.id;
@@ -32,7 +42,7 @@ const updateUser = async (req,res) => {
 
 // delete user (Soft delete)
 
-const deleteUser = async ( req,res) => {
+const deativateUser = async ( req,res) => {
   let id = req.params.id;
   let info = {
     isdeleted : true
@@ -41,10 +51,20 @@ const deleteUser = async ( req,res) => {
   res.status(200).send(user);
 }
 
+const ativateUser = async ( req,res) => {
+  let id = req.params.id;
+  let info = {
+    isdeleted : false
+  }
+  const user = await User.update(info, {where: {id:id}});
+  res.status(200).send(user);
+}
 
 module.exports = {
   addUser,
   getAllUsers,
   updateUser,
-  deleteUser
+  deativateUser,
+  ativateUser,
+  getOne
 }
