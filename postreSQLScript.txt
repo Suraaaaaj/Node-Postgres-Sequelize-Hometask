@@ -1,0 +1,14 @@
+create table users(
+    id int,
+    login varchar(30),
+    password varchar(30),
+    firstname varchar(30),
+    lastname varchar(30),
+    age int,
+    isdeleted boolean
+);
+
+INSERT INTO users VALUES('111','user1','user1@123','one','user',29,true);
+INSERT INTO users VALUES('121','user2','user2@123','two','user',30,true);
+INSERT INTO users VALUES('143','user3','user3@123','three','user',45,false);
+INSERT INTO users VALUES('122','user4','user4@123','four','user',18,true);
